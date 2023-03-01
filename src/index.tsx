@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Watch from "./pages/Watch";
 import Trending from "./pages/Trending";
 import Error from "./pages/Error";
+import Results from "./pages/Results";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "/trending",
                 element: <Trending />,
+            },
+            {
+                path: "/results",
+                element: <Results />,
             },
         ],
     },

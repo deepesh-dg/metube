@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { IThumbnails, IVideoItem } from "../../interfaces/IVideoList";
-import WatchLink from "../WatchLink/WatchLink";
+import WatchLink from "../watch-link/WatchLink";
 import style from "./VideoCard.module.scss";
 
 type Props = {
