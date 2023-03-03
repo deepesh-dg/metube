@@ -10,6 +10,9 @@ const conf = {
         ...myConf.api,
         segment: {
             videoList: myConf.api.base + "videos?key=" + myConf.api.key,
+            search: myConf.api.base + "search?key=" + myConf.api.key,
+            autoSuggession:
+                "https://corsanywhere.herokuapp.com/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt",
         },
     },
 };

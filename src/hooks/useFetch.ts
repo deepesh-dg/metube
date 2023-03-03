@@ -9,11 +9,12 @@ type Options = {
         allowed: boolean;
         data: boolean;
     };
+    debounce?: number;
 };
 
 const useFetch = <TData = any>(
     url: string,
-    { cacheData = { allowed: true, data: true }, ...options }: RequestInit & Options
+    { cacheData = { allowed: true, data: true }, debounce = 0, ...options }: RequestInit & Options
 ) => {
     const [data, setData] = useState<TData>();
     const [loader, setLoader] = useState<boolean>(true);
@@ -35,11 +36,9 @@ const useFetch = <TData = any>(
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
+        let cancelTimeout: NodeJS.Timeout | undefined;
 
-        if (cacheData.data && cachedData) {
-            setData(cachedData);
-            setLoader(false);
-        } else {
+        const callFetch = () => {
             fetch(url, { ...options, signal })
                 .then((res) => res.json())
                 .then((data) => {
@@ -48,12 +47,19 @@ const useFetch = <TData = any>(
                 })
                 .catch(() => setError(true))
                 .finally(() => setLoader(false));
-        }
+        };
 
-        // return () => {
-        //     controller.abort();
-        // };
-    }, []);
+        if (cacheData.data && cachedData) {
+            setData(cachedData);
+            setLoader(false);
+        } else if (debounce > 0) cancelTimeout = setTimeout(callFetch, debounce);
+        else callFetch();
+
+        return () => {
+            // controller.abort();
+            if (cancelTimeout) clearInterval(cancelTimeout);
+        };
+    }, [url]);
 
     return { data, loader, error };
 };

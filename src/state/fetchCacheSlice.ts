@@ -10,6 +10,7 @@ const FetchCacheSlice = createSlice({
     reducers: {
         add: (state, action: { type: string; payload: { name: string; payload: any } }) => {
             state[action.payload.name] = action.payload.payload;
+
             if (Object.keys(state).length > 20) delete state[Object.keys(state)[0]];
         },
         remove: (state, action: { type: string; payload: string }) => {

@@ -44,7 +44,7 @@ export interface ISnippet {
 }
 
 export interface IVideoItem {
-    kind: string;
+    kind: "youtube#video" | "youtube#movie" | "youtube#channel" | "youtube#playlist";
     etag: string;
     id: string;
     snippet?: ISnippet;
