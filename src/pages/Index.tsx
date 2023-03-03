@@ -28,14 +28,12 @@ const Index = () => {
     if (error) return <h2>Error Fetching Videos</h2>;
 
     return data ? (
-        <div className="container-fluid">
-            <div className="row g-3">
-                {data.items.map((videoDetails) => (
-                    <div key={videoDetails.id} className="col-12 col-sm-6 col-lg-4 col-xxl-3">
-                        <VideoCard videoDetails={videoDetails} />
-                    </div>
-                ))}
-            </div>
+        <div className="row g-3">
+            {data.items.map((videoDetails) => (
+                <div key={videoDetails.id} className="col-12 col-sm-6 col-lg-4 col-xxl-3">
+                    <VideoCard videoDetails={videoDetails} />
+                </div>
+            ))}
         </div>
     ) : null;
 };

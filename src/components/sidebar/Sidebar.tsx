@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export type NavItem = {
     name: string;
@@ -35,11 +35,19 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className="list-group">
+        <div className="list-group text-center list-group-flush">
             {navItems.map((item, index) => (
-                <Link className="list-group-item list-group-item-action" key={index} to={item.to}>
+                <NavLink
+                    className={({ isActive, isPending }) => {
+                        const append = isActive ? "active" : "";
+
+                        return `list-group-item list-group-item-action rounded-3 ${append}`;
+                    }}
+                    key={index}
+                    to={item.to}
+                >
                     {item.name}
-                </Link>
+                </NavLink>
             ))}
         </div>
     );
