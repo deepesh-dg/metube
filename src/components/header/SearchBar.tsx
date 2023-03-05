@@ -2,11 +2,11 @@ import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import conf from "../../conf/conf";
 import useFetch from "../../hooks/useFetch";
-import SearchSuggessionLists from "./SearchSuggestionLists";
+import SearchSuggestionLists from "./SearchSuggestionLists";
 import style from "./SearchBar.module.scss";
 
 const SearchBar = () => {
-    const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+    const [isSearchBarFocused, setIsSearchBarFocused] = useState<boolean>(false);
     const [query, setQuery] = useState<string>("");
     const id = useId();
     const navigate = useNavigate();
@@ -48,8 +48,8 @@ const SearchBar = () => {
                         className={`form-control ${style.input}`}
                         onChange={(e) => setQuery(e.target.value)}
                         value={query}
-                        onFocus={() => setShowSuggestions(true)}
-                        onBlur={() => setShowSuggestions(false)}
+                        onFocus={() => setIsSearchBarFocused(true)}
+                        onBlur={() => setIsSearchBarFocused(false)}
                         placeholder="Search"
                     />
                     <button className={`btn bg-light border ${style.button}`} disabled={query === ""}>
@@ -67,10 +67,10 @@ const SearchBar = () => {
                 </div>
             </form>
             <div className={style.suggestions}>
-                <SearchSuggessionLists
-                    showSuggestions={showSuggestions}
+                <SearchSuggestionLists
+                    isSearchBarFocused={isSearchBarFocused}
                     suggestions={suggestions}
-                    suggessionSelected={(query) => {
+                    suggestionSelected={(query) => {
                         navigate({
                             pathname: "/results",
                             search: "?search_query=" + query,
