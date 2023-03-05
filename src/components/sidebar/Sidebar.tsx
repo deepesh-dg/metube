@@ -34,7 +34,7 @@ const Sidebar = () => {
                         className={({ isActive }) => {
                             const append = isActive ? "active" : "";
 
-                            return `list-group-item list-group-item-action rounded-3 ${append}`;
+                            return `list-group-item list-group-item-action border-0 rounded-3 ${append}`;
                         }}
                         key={index}
                         to={item.to}
