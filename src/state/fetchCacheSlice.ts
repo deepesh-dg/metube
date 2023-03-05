@@ -14,7 +14,7 @@ const FetchCacheSlice = createSlice({
             if (Object.keys(state).length > 20) delete state[Object.keys(state)[0]];
         },
         remove: (state, action: { type: string; payload: string }) => {
-            delete state[Object.keys(action.payload)[0]];
+            delete state[action.payload];
         },
     },
 });

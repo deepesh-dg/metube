@@ -1,6 +1,6 @@
 .suggestions {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.25rem);
     left: 0%;
     right: 0%;
 }

@@ -4,7 +4,7 @@ export interface ISearchVideoItem {
     kind: string;
     etag: string;
     id: {
-        kind: "youtube#video" | "youtube#movie" | "youtube#channel" | "youtube#playlist";
+        kind: "youtube#video" | "youtube#channel" | "youtube#playlist";
         videoId?: string;
         channelId?: string;
         playlistId?: string;

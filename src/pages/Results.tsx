@@ -32,18 +32,23 @@ const Results = () => {
         >
             <div className="py-3">
                 <div className="row g-3">
-                    {data.items.map((videoDetails) =>
-                        videoDetails.id.kind === "youtube#video" ? (
-                            <div key={videoDetails.id.videoId} className="col-12">
-                                <VideoCard
-                                    videoDetails={videoDetails}
-                                    orientation="landscape"
-                                    description
-                                    channelIcon={false}
-                                />
-                            </div>
-                        ) : null
-                    )}
+                    {data.items.map((videoDetails) => {
+                        if (videoDetails.id.kind === "youtube#video")
+                            return (
+                                <div key={videoDetails.id.videoId} className="col-12">
+                                    <VideoCard
+                                        videoDetails={videoDetails}
+                                        orientation="landscape"
+                                        description
+                                        channelIcon={false}
+                                    />
+                                </div>
+                            );
+                        else if (videoDetails.id.kind === "youtube#channel")
+                            return <div key={videoDetails.id.channelId}></div>;
+
+                        return null;
+                    })}
                 </div>
             </div>
         </div>

@@ -17,16 +17,12 @@ const Sidebar = () => {
             to: "/trending",
         },
         {
-            name: "Shorts",
+            name: "History",
+            to: "/history",
         },
         {
-            name: "Subscriptions",
-        },
-        {
-            name: "Originals",
-        },
-        {
-            name: "MeTube Music",
+            name: "Watch Later",
+            to: "/watch-later",
         },
     ];
 

@@ -7,6 +7,7 @@ import conf from "../conf/conf";
 import useFetch from "../hooks/useFetch";
 import { IVideoList } from "../interfaces/IVideoList";
 import { closeSidebar } from "../state/collapseSidebarSlide";
+import { add } from "../state/historySlide";
 
 const Watch = () => {
     const [urlSearchParam] = useSearchParams();
@@ -23,9 +24,16 @@ const Watch = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!vId || (data && data?.items.length === 0)) navigate("/");
+        if (!vId || (data && data?.items.length === 0)) {
+            navigate("/");
+            return;
+        }
         dispatch(closeSidebar());
     });
+
+    useEffect(() => {
+        if (data) dispatch(add(data.items[0]));
+    }, [data]);
 
     if (loader) return <h2>Loading</h2>;
 

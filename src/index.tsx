@@ -11,6 +11,8 @@ import Watch from "./pages/Watch";
 import Trending from "./pages/Trending";
 import Error from "./pages/Error";
 import Results from "./pages/Results";
+import History from "./pages/History";
+import WatchLater from "./pages/WatchLater";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
             {
                 path: "/results",
                 element: <Results />,
+            },
+            {
+                path: "/history",
+                element: <History />,
+            },
+            {
+                path: "/watch-later",
+                element: <WatchLater />,
             },
         ],
     },
