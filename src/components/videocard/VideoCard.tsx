@@ -9,6 +9,7 @@ type Props<T> = {
     channelIcon?: boolean;
     channelName?: boolean;
     description?: boolean;
+    watchLater?: boolean;
 };
 
 const instanceOfVideoItem = (data: any): data is IVideoItem => {
@@ -61,7 +62,7 @@ function VideoCard({ videoDetails, ...props }: Props<IVideoItem | ISearchVideoIt
         };
     }
 
-    return <Card {...props} videoDetails={videoInfo} />;
+    return <Card {...props} videoDetails={videoInfo} original={videoDetails} />;
 }
 
 export default VideoCard;

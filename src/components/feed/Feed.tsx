@@ -9,7 +9,13 @@ const Feed = ({ videos }: { videos: IVideoItem[] }) => {
             <div className="row g-3">
                 {videos.map((video) => (
                     <div key={video.id} className="col-12">
-                        <VideoCard videoDetails={video} orientation="landscape" description channelIcon={false} />
+                        <VideoCard
+                            videoDetails={video}
+                            orientation="landscape"
+                            description
+                            channelIcon={false}
+                            watchLater
+                        />
                     </div>
                 ))}
             </div>

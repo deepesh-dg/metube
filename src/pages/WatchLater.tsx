@@ -7,10 +7,16 @@ const WatchLater = () => {
 
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", maxWidth: "900px" }}>
-            <div className="row gy-3 flex-column-reverse">
+            <div className="row gy-3">
                 {watchLater.map((video) => (
                     <div className="col-12" key={video.id}>
-                        <VideoCard videoDetails={video} orientation="landscape" description channelIcon={false} />
+                        <VideoCard
+                            videoDetails={video}
+                            orientation="landscape"
+                            description
+                            channelIcon={false}
+                            watchLater
+                        />
                     </div>
                 ))}
                 {watchLater.length === 0 && (

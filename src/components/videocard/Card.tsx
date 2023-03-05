@@ -3,6 +3,9 @@ import { IThumbnails } from "../../interfaces/IVideoList";
 import WatchLink from "../watch-link/WatchLink";
 import style from "./VideoCard.module.scss";
 import moment from "moment";
+import { useAppSelector } from "../../state/store";
+import { useDispatch } from "react-redux";
+import { add, remove } from "../../state/watchLaterSlide";
 
 export type TVideoDetails = {
     id: string;
@@ -19,8 +22,10 @@ type Props = {
     orientation?: "landscape" | "portrait";
     channelIcon?: boolean;
     channelName?: boolean;
+    watchLater?: boolean;
     description?: boolean;
     videoDetails: TVideoDetails;
+    original: any;
 };
 
 export const getCount = (count: number): string => {
@@ -90,8 +95,21 @@ const Card = ({
     orientation = "portrait",
     channelIcon = true,
     channelName = true,
+    watchLater = false,
     description = false,
+    original,
 }: Props) => {
+    const watchLaterList = useAppSelector((store) => store.watchLater);
+
+    const isWatchLater: boolean = watchLaterList.filter((video) => video.id === videoDetails.id).length > 0;
+
+    const dispatch = useDispatch();
+
+    const toggleWatchList = () => {
+        if (isWatchLater) dispatch(remove(videoDetails.id));
+        else dispatch(add(original));
+    };
+
     return (
         <div className={style.videocard}>
             <div className="row gx-2">
@@ -109,6 +127,39 @@ const Card = ({
                             </div>
                             <div className={style.duration}>{getDuration(videoDetails.duration)}</div>
                         </WatchLink>
+                        {original.kind === "youtube#video" && watchLater ? (
+                            <div className={style.watchLater}>
+                                <button
+                                    className="reset"
+                                    title={isWatchLater ? "remove from watch later" : "add to watch later"}
+                                    onClick={toggleWatchList}
+                                >
+                                    {isWatchLater ? (
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            preserveAspectRatio="xMidYMid meet"
+                                            focusable="false"
+                                            style={{ pointerEvents: "none", display: "block", width: "24px" }}
+                                        >
+                                            <g>
+                                                <path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path>
+                                            </g>
+                                        </svg>
+                                    ) : (
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            preserveAspectRatio="xMidYMid meet"
+                                            focusable="false"
+                                            style={{ pointerEvents: "none", display: "block", width: "24px" }}
+                                        >
+                                            <g>
+                                                <path d="M14.97,16.95L10,13.87V7h2v5.76l4.03,2.49L14.97,16.95z M12,3c-4.96,0-9,4.04-9,9s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12S6.48,2,12,2L12,2z"></path>
+                                            </g>
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className={orientation === "portrait" ? "col-12" : "col-7"}>

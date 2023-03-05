@@ -18,7 +18,7 @@ const Index = () => {
 
     const dispatch = useDispatch();
 
-    // Opening Sicebar
+    // Opening Sidebar
     useEffect(() => {
         dispatch(openSidebar());
     });
@@ -31,7 +31,7 @@ const Index = () => {
         <div className="row g-3">
             {data.items.map((videoDetails) => (
                 <div key={videoDetails.id} className="col-12 col-sm-6 col-lg-4 col-xxl-3">
-                    <VideoCard videoDetails={videoDetails} />
+                    <VideoCard videoDetails={videoDetails} watchLater />
                 </div>
             ))}
         </div>

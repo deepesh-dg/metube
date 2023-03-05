@@ -9,13 +9,19 @@ const WatchLater = createSlice({
     reducers: {
         add: (state, action: { type: string; payload: IVideoItem }) => {
             if (state.filter((item) => item.id === action.payload.id).length > 0) {
-                state = state.filter((item) => item.id !== action.payload.id);
+                state.splice(
+                    state.findIndex((item) => item.id === action.payload.id),
+                    1
+                );
             }
 
             state.push(action.payload);
         },
         remove: (state, action: { type: string; payload: string }) => {
-            state = state.filter((item) => item.id !== action.payload);
+            state.splice(
+                state.findIndex((item) => item.id === action.payload),
+                1
+            );
         },
     },
 });

@@ -10,7 +10,13 @@ const History = () => {
             <div className="row gy-3 flex-column-reverse">
                 {history.map((video) => (
                     <div className="col-12" key={video.id}>
-                        <VideoCard videoDetails={video} orientation="landscape" description channelIcon={false} />
+                        <VideoCard
+                            videoDetails={video}
+                            orientation="landscape"
+                            description
+                            channelIcon={false}
+                            watchLater
+                        />
                     </div>
                 ))}
                 {history.length === 0 && (
