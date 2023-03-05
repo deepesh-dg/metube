@@ -35,11 +35,10 @@ const useFetch = <TData = any>(
 
     useEffect(() => {
         const controller = new AbortController();
-        const signal = controller.signal;
         let cancelTimeout: NodeJS.Timeout | undefined;
 
         const callFetch = () => {
-            fetch(url, { ...options, signal })
+            fetch(url, { ...options, signal: controller.signal })
                 .then((res) => res.json())
                 .then((data) => {
                     if (cacheData.allowed) dispatch(add({ name: url, payload: data }));
@@ -57,7 +56,7 @@ const useFetch = <TData = any>(
 
         return () => {
             // controller.abort();
-            if (cancelTimeout) clearInterval(cancelTimeout);
+            clearInterval(cancelTimeout);
         };
     }, [url]);
 

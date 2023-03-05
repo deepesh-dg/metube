@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import VideoCard from "../components/videocard/VideoCard";
 import conf from "../conf/conf";
 import useFetch from "../hooks/useFetch";
+import useTitle from "../hooks/useTitle";
 import { ISearchVideoList } from "../interfaces/ISearchVideoList";
 
 const Results = () => {
@@ -16,6 +17,8 @@ const Results = () => {
             ["maxResults", "20"],
         ],
     });
+
+    useTitle(query);
 
     if (loader) return <h2>Loading</h2>;
 

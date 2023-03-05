@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import VideoCard from "../components/videocard/VideoCard";
 import conf from "../conf/conf";
 import useFetch from "../hooks/useFetch";
+import useTitle from "../hooks/useTitle";
 import { IVideoList } from "../interfaces/IVideoList";
-import { openSidebar } from "../state/collapseSidebarSlide";
 
 const Index = () => {
     const { data, loader, error } = useFetch<IVideoList>(conf.api.segment.videoList, {
@@ -16,12 +14,7 @@ const Index = () => {
         ],
     });
 
-    const dispatch = useDispatch();
-
-    // Opening Sidebar
-    useEffect(() => {
-        dispatch(openSidebar());
-    });
+    useTitle("Home");
 
     if (loader) return <h2>Loading</h2>;
 

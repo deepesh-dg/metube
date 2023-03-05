@@ -5,8 +5,9 @@ import Sidebar from "../components/video-details-sidebar/Sidebar";
 import VideoDetails from "../components/video-details/VideoDetails";
 import conf from "../conf/conf";
 import useFetch from "../hooks/useFetch";
+import useTitle from "../hooks/useTitle";
 import { IVideoList } from "../interfaces/IVideoList";
-import { closeSidebar } from "../state/collapseSidebarSlide";
+import { closeSidebar, openSidebar } from "../state/collapseSidebarSlide";
 import { add } from "../state/historySlide";
 
 const Watch = () => {
@@ -29,11 +30,17 @@ const Watch = () => {
             return;
         }
         dispatch(closeSidebar());
+
+        return () => {
+            dispatch(openSidebar());
+        };
     });
 
     useEffect(() => {
         if (data) dispatch(add(data.items[0]));
     }, [data]);
+
+    useTitle(data?.items[0].snippet?.title || "");
 
     if (loader) return <h2>Loading</h2>;
 

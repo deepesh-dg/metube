@@ -1,9 +1,12 @@
 import React from "react";
 import VideoCard from "../components/videocard/VideoCard";
+import useTitle from "../hooks/useTitle";
 import { useAppSelector } from "../state/store";
 
 const History = () => {
     const history = useAppSelector((state) => state.history);
+
+    useTitle("History");
 
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", maxWidth: "900px" }}>

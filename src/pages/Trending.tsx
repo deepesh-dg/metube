@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import TrendingComponent from "../components/feed/Feed";
 import conf from "../conf/conf";
 import useFetch from "../hooks/useFetch";
+import useTitle from "../hooks/useTitle";
 import { IVideoList } from "../interfaces/IVideoList";
 import { openSidebar } from "../state/collapseSidebarSlide";
 
@@ -22,6 +23,8 @@ const Trending = () => {
     useEffect(() => {
         dispatch(openSidebar());
     });
+
+    useTitle("Trending");
 
     if (loader) return <h2>Loading</h2>;
 
