@@ -1,0 +1,15 @@
+.description {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: var(--bs-light);
+    display: block;
+    word-wrap: break-word;
+
+    &.collapsed {
+        max-height: 110px;
+        overflow: hidden;
+    }
+}

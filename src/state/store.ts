@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import collapseSidebarSlide from "./collapseSidebarSlide";
 import fetchCacheSlice from "./fetchCacheSlice";
 import historySlide from "./historySlide";
+import subscriptionSlide from "./subscriptionSlide";
 import watchLaterSlide from "./watchLaterSlide";
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
         fetchCache: fetchCacheSlice,
         history: historySlide,
         watchLater: watchLaterSlide,
+        subscription: subscriptionSlide,
     },
 });
 
